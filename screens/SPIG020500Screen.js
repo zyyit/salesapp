@@ -434,7 +434,7 @@ const SPIG020500Screen = props => {
                       >
                         {/* SVG 2 */}
                         <SVG
-                          source={'https://zynanci.top:441/map_blue.svg'}
+                          source={'https://zynanci.top:441/house.svg'}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
                               GlobalStyles.SVGStyles(theme)['SVG'],

@@ -88,96 +88,6 @@ line two` ) and will not work with special characters inside of quotes ( example
     );
   };
 
-  const clacDate = clacType => {
-    // Type the code for the body of your function or hook here.
-    // Functions can be triggered via Button/Touchable actions.
-    // Hooks are run per ReactJS rules.
-
-    /* String line breaks are accomplished with backticks ( example: `line one
-line two` ) and will not work with special characters inside of quotes ( example: "line one line two" ) */
-    let newDate = thisDay;
-    console.log('1:' + newDate);
-    if (clacType === 1) {
-      newDate.setDate(newDate.getDate() + 1);
-    } else if (clacType === 2) {
-      newDate.setDate(newDate.getDate() - 1);
-    } else if (clacType === 3) {
-      console.log(newDate.getDate() - 7 + '上周');
-      if (newDate.getDate() - 7 < 1) {
-        newDate.setMonth(newDate.getMonth() - 1);
-        newDate.setDate(newDate.getDate() - 7);
-      } else {
-        newDate.setDate(newDate.getDate() - 7);
-      }
-    } else if (clacType === 4) {
-      const tempDate = thisDay;
-      year = tempDate.getFullYear();
-      month = tempDate.getMonth() + 1;
-      let days = new Date(year, month, 0).getDate();
-      console.log(newDate.getDate() + 7 + '下周' + month + ':' + days);
-      if (newDate.getDate() + 7 > days) {
-        console.log(newDate.getDate() + 7 + '下周' + month + ':' + days);
-        newDate.setDate(newDate.getDate() + 7);
-        newDate.setMonth(newDate.getMonth() + 1);
-        console.log(newDate.getDate() + 7 + '下周' + month + ':' + days);
-      } else {
-        newDate.setDate(newDate.getDate() + 7);
-      }
-    }
-    console.log('2:' + newDate);
-    setThisDay(newDate);
-  };
-
-  const weekTopDate = (Variables, initFlg) => {
-    let year = '';
-    let month = '';
-    let day = '';
-    let weekday = '';
-    const weekDays = ['日', '月', '火', '水', '木', '金', '土'];
-    const daysArr = new Array();
-    if (initFlg != null) {
-      console.log(thisDay + '1');
-      const newDay = thisDay;
-      year = newDay.getFullYear();
-      month = (newDay.getMonth() + 1).toString().padStart(2, '0');
-      day = newDay.getDate().toString();
-      const arrDay = new Date(newDay.getDate());
-      let index = 0;
-      weekday = weekDays[newDay.getDay()];
-      for (let i = 0; i < weekDays.length; i++) {
-        if (weekday == weekDays[i]) {
-          index = i;
-        }
-      }
-      console.log(index);
-      for (let j = 0; j < weekDays.length; j++) {
-        console.log(newDay);
-        console.log(j - index + '[' + newDay.getDate() + (j - index) + ']');
-        arrDay.setDate(newDay.getDate() + (j - index));
-        daysArr.push(arrDay.getDate().toString() + '(' + weekDays[j] + ')');
-      }
-      console.log(daysArr);
-      setDay(daysArr);
-    } else {
-      const newDay = new Date();
-      console.log(newDay + '2');
-      year = newDay.getFullYear();
-      month = (newDay.getMonth() + 1).toString().padStart(2, '0');
-      day = newDay.getDate().toString();
-      let index = 0;
-      weekday = weekDays[newDay.getDay()];
-      for (let i = 0; i < weekDays.length; i++) {
-        if (weekday == weekDays[i]) {
-          index = i;
-        }
-      }
-      for (let j = 0; j < weekDays.length; j++) {
-        newDay.setDate(newDay.getDate() + (j - index));
-        daysArr.push(newDay.getDate().toString() + '(' + weekDays[j] + ')');
-      }
-    }
-  };
-
   const addConten = (
     Variables,
     setGlobalVariableValue,
@@ -199,19 +109,73 @@ line two` ) and will not work with special characters inside of quotes ( example
     console.log('contentData2' + contentData);
   };
 
+  const weekTopDate = (Variables, initFlg) => {
+    let daysArr = new Array();
+    if (initFlg) {
+      console.log('初期化');
+      const newDay = new Date();
+      daysArr = setWeekDate(newDay);
+    } else {
+      console.log('点击后');
+      const newDay = thisDay;
+      daysArr = setWeekDate(newDay);
+    }
+    console.log('这周的日期：' + daysArr);
+    setDay(daysArr);
+  };
+
+  const setWeekDate = newDay => {
+    let weekday = '';
+    const weekDays = ['日', '月', '火', '水', '木', '金', '土'];
+    const daysArr = new Array();
+    let index = 0;
+    weekday = weekDays[newDay.getDay()];
+    const arrDay = new Date(newDay.getDate());
+    for (let i = 0; i < weekDays.length; i++) {
+      if (weekday == weekDays[i]) {
+        index = i;
+      }
+    }
+    console.log('今天是周' + index);
+    for (let j = 0; j < weekDays.length; j++) {
+      arrDay.setDate(newDay.getDate() + (j - index));
+      daysArr.push(arrDay.getDate().toString() + '(' + weekDays[j] + ')');
+    }
+    return daysArr;
+  };
+
+  const clacDate = clacType => {
+    // Type the code for the body of your function or hook here.
+    // Functions can be triggered via Button/Touchable actions.
+    // Hooks are run per ReactJS rules.
+
+    /* String line breaks are accomplished with backticks ( example: `line one
+line two` ) and will not work with special characters inside of quotes ( example: "line one line two" ) */
+    let newDate = thisDay;
+    console.log('1:' + newDate);
+    if (clacType === 1) {
+      newDate.setDate(newDate.getDate() + 1);
+    } else if (clacType === 2) {
+      newDate.setDate(newDate.getDate() - 1);
+    } else if (clacType === 3) {
+      newDate.setDate(newDate.getDate() - 7);
+    } else if (clacType === 4) {
+      newDate.setDate(newDate.getDate() + 7);
+    }
+    console.log('2:' + newDate);
+    setThisDay(newDate);
+  };
+
   const isFocused = useIsFocused();
   React.useEffect(() => {
-    const handler = async () => {
-      try {
-        if (!isFocused) {
-          return;
-        }
-        await setTodayText(undefined);
-      } catch (err) {
-        console.error(err);
+    try {
+      if (!isFocused) {
+        return;
       }
-    };
-    handler();
+      weekTopDate(Variables, Constants['IsTrue']);
+    } catch (err) {
+      console.error(err);
+    }
   }, [isFocused]);
   const [contentData, setContentData] = React.useState([]);
   const [day, setDay] = React.useState([]);
@@ -637,7 +601,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                             dimensions.width
                           )}
                         >
-                          {null}
+                          {day.slice(1, 2)}
                         </Text>
                       </View>
                       {/* View Tue */}
@@ -668,7 +632,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                             dimensions.width
                           )}
                         >
-                          {null}
+                          {day.slice(2, 3)}
                         </Text>
                       </View>
                       {/* View Web */}
@@ -699,7 +663,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                             dimensions.width
                           )}
                         >
-                          {null}
+                          {day.slice(3, 4)}
                         </Text>
                       </View>
                       {/* View Thur */}
@@ -730,7 +694,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                             dimensions.width
                           )}
                         >
-                          {null}
+                          {day.slice(4, 5)}
                         </Text>
                       </View>
                       {/* View Fri */}
@@ -761,7 +725,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                             dimensions.width
                           )}
                         >
-                          {null}
+                          {day.slice(5, 6)}
                         </Text>
                       </View>
                       {/* View Sat */}

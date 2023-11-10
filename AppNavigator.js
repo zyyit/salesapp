@@ -17,7 +17,7 @@ import SPIG020700Screen from './screens/SPIG020700Screen';
 import SPIG020800Screen from './screens/SPIG020800Screen';
 import SPIG030000Screen from './screens/SPIG030000Screen';
 import SPIG030100Screen from './screens/SPIG030100Screen';
-import SPIG30200Screen from './screens/SPIG30200Screen';
+import SPIG030200Screen from './screens/SPIG030200Screen';
 import Swiper020000Screen from './screens/Swiper020000Screen';
 import Swiper2Screen from './screens/Swiper2Screen';
 import SwiperScreen from './screens/SwiperScreen';
@@ -238,10 +238,10 @@ export default function RootAppNavigator() {
           }}
         />
         <Stack.Screen
-          name="SPIG30200Screen"
-          component={SPIG30200Screen}
+          name="SPIG030200Screen"
+          component={SPIG030200Screen}
           options={{
-            title: 'SPIG30200',
+            title: 'SPIG030200',
           }}
         />
         <Stack.Screen
