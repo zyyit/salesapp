@@ -13,15 +13,8 @@ import {
   SwipeableItem,
   withTheme,
 } from '@draftbit/ui';
-import { H1 } from '@expo/html-elements';
 import * as Linking from 'expo-linking';
-import {
-  Image,
-  ScrollView,
-  Text,
-  View,
-  useWindowDimensions,
-} from 'react-native';
+import { Image, Text, View, useWindowDimensions } from 'react-native';
 
 const SPIG020800Screen = props => {
   const dimensions = useWindowDimensions();
@@ -58,7 +51,7 @@ const SPIG020800Screen = props => {
           {
             alignItems: 'flex-start',
             borderBottomWidth: 1,
-            borderColor: 'rgb(204, 204, 204)',
+            borderColor: theme.colors['Light'],
             flexDirection: 'row',
             height: 63,
             justifyContent: 'flex-start',
@@ -110,7 +103,7 @@ const SPIG020800Screen = props => {
             dimensions.width
           )}
         >
-          {'営業権利決裁'}
+          {'案件一覧'}
         </Text>
       </View>
       {/* View 3 */}
@@ -120,9 +113,8 @@ const SPIG020800Screen = props => {
             {
               alignItems: 'stretch',
               borderBottomWidth: 1,
-              borderTopWidth: 1,
-              height: 60,
-              marginTop: 10,
+              borderColor: theme.colors['Light'],
+              height: 75,
               width: '135%',
             },
             dimensions.width
@@ -148,8 +140,10 @@ const SPIG020800Screen = props => {
             <View
               style={StyleSheet.applyWidth(
                 {
+                  alignSelf: 'stretch',
                   flexDirection: 'row',
-                  height: 50,
+                  height: 75,
+                  justifyContent: 'flex-start',
                   marginLeft: 15,
                   marginTop: 4,
                   width: 379,
@@ -159,17 +153,17 @@ const SPIG020800Screen = props => {
             >
               <View
                 style={StyleSheet.applyWidth(
-                  { height: 40, marginTop: 4, width: 40 },
+                  { height: 50, marginTop: 10, width: 50 },
                   dimensions.width
                 )}
               >
                 <Image
                   resizeMode={'cover'}
-                  source={{ uri: `${Constants['image']}` }}
+                  source={{ uri: 'https://zynanci.top:441/buin_2.png' }}
                   style={StyleSheet.applyWidth(
                     StyleSheet.compose(
                       GlobalStyles.ImageStyles(theme)['Image'],
-                      { borderRadius: 55, height: 40, width: 40 }
+                      { borderRadius: 55, height: 50, width: 50 }
                     ),
                     dimensions.width
                   )}
@@ -202,6 +196,19 @@ const SPIG020800Screen = props => {
                   {'斎藤    龍之介    様'}
                 </Text>
                 {/* Text 2 */}
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  style={StyleSheet.applyWidth(
+                    StyleSheet.compose(GlobalStyles.TextStyles(theme)['Text'], {
+                      fontSize: 13,
+                    }),
+                    dimensions.width
+                  )}
+                >
+                  {'Tel：15829614581'}
+                </Text>
+                {/* Text 3 */}
                 <Text
                   accessible={true}
                   allowFontScaling={true}

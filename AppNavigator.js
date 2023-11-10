@@ -16,6 +16,8 @@ import SPIG020500Screen from './screens/SPIG020500Screen';
 import SPIG020700Screen from './screens/SPIG020700Screen';
 import SPIG020800Screen from './screens/SPIG020800Screen';
 import SPIG030000Screen from './screens/SPIG030000Screen';
+import SPIG030100Screen from './screens/SPIG030100Screen';
+import SPIG30200Screen from './screens/SPIG30200Screen';
 import Swiper020000Screen from './screens/Swiper020000Screen';
 import Swiper2Screen from './screens/Swiper2Screen';
 import SwiperScreen from './screens/SwiperScreen';
@@ -233,6 +235,20 @@ export default function RootAppNavigator() {
           component={Swiper2Screen}
           options={{
             title: 'Swiper2',
+          }}
+        />
+        <Stack.Screen
+          name="SPIG30200Screen"
+          component={SPIG30200Screen}
+          options={{
+            title: 'SPIG30200',
+          }}
+        />
+        <Stack.Screen
+          name="SPIG030100Screen"
+          component={SPIG030100Screen}
+          options={{
+            title: 'SPIG030100',
           }}
         />
         <Stack.Screen name="SPaMobile" component={SPaMobile} />
