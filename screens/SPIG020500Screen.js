@@ -2,6 +2,7 @@ import React from 'react';
 import * as GlobalStyles from '../GlobalStyles.js';
 import * as SPIG020500Api from '../apis/SPIG020500Api.js';
 import * as GlobalVariables from '../config/GlobalVariableContext';
+import Images from '../config/Images';
 import Breakpoints from '../utils/Breakpoints';
 import * as StyleSheet from '../utils/StyleSheet';
 import showAlertUtil from '../utils/showAlert';
@@ -380,12 +381,12 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG1 */}
-                        <SVG
-                          source={'https://zynanci.top:441/note.svg'}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.Snipaste}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
                                 marginLeft: 12,
@@ -432,17 +433,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 2 */}
-                        <SVG
-                          source={'https://zynanci.top:441/house.svg'}
+                        {/* Image 2 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MapBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 12,
+                                marginLeft: 13,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -482,17 +484,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 3 */}
-                        <SVG
-                          source={'https://zynanci.top:441/phone_blue.svg'}
+                        {/* Image 2 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.PhoneBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 11,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -535,17 +538,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 4 */}
-                        <SVG
-                          source={'https://zynanci.top:441/msg_blue.svg'}
+                        {/* Image 2 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MsgBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 9,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 33,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -877,12 +881,14 @@ const SPIG020500Screen = props => {
                           backgroundColor: 'rgb(236, 233, 233)',
                           borderBottomWidth: 1,
                           borderColor: theme.colors['Light'],
+                          borderTopWidth: 1,
                           flexDirection: 'row',
                           height: 32,
                           justifyContent: 'space-between',
                           marginBottom: 10,
                           marginLeft: -16,
                           marginRight: -16,
+                          marginTop: -1,
                           paddingBottom: 5,
                           paddingLeft: 15,
                           paddingTop: 5,
@@ -1249,154 +1255,6 @@ const SPIG020500Screen = props => {
                       >
                         {'150 日経過'}
                       </Text>
-                    </View>
-                    {/* View 12 */}
-                    <View
-                      style={StyleSheet.applyWidth(
-                        {
-                          borderBottomWidth: 1,
-                          borderColor: theme.colors['Light'],
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          marginBottom: 10,
-                          marginLeft: -16,
-                          marginRight: -16,
-                          marginTop: -10,
-                          paddingBottom: 5,
-                          paddingLeft: 16,
-                          paddingRight: 44,
-                          paddingTop: 5,
-                        },
-                        dimensions.width
-                      )}
-                    >
-                      {/* Fetch 2 */}
-                      <SPIG020500Api.FetchSelectPrefecturesGET
-                        handlers={{
-                          onData: fetch2Data => {
-                            const handler = async () => {
-                              try {
-                                const prefectureList = (
-                                  await SPIG020500Api.selectPrefecturesGET(
-                                    Constants
-                                  )
-                                )?.json;
-                                setGlobalVariableValue({
-                                  key: 'prefectures',
-                                  value: prefectureList,
-                                });
-                              } catch (err) {
-                                console.error(err);
-                              }
-                            };
-                            handler();
-                          },
-                        }}
-                      >
-                        {({
-                          loading,
-                          error,
-                          data,
-                          refetchSelectPrefectures,
-                        }) => {
-                          const fetch2Data = data?.json;
-                          if (loading) {
-                            return <ActivityIndicator />;
-                          }
-
-                          if (
-                            error ||
-                            data?.status < 200 ||
-                            data?.status >= 300
-                          ) {
-                            return <ActivityIndicator />;
-                          }
-
-                          return (
-                            <Picker
-                              autoDismissKeyboard={true}
-                              dropDownBackgroundColor={theme.colors.background}
-                              dropDownBorderColor={theme.colors.divider}
-                              dropDownBorderRadius={8}
-                              dropDownBorderWidth={1}
-                              dropDownTextColor={theme.colors.strong}
-                              iconSize={24}
-                              leftIconMode={'inset'}
-                              mode={'native'}
-                              onValueChange={newPickerValue => {
-                                const handler = async () => {
-                                  try {
-                                    setPrefecture(newPickerValue);
-                                    const cititys = (
-                                      await SPIG020500Api.selectCitisGET(
-                                        Constants,
-                                        { prefectureId: newPickerValue }
-                                      )
-                                    )?.json;
-                                    setGlobalVariableValue({
-                                      key: 'citys',
-                                      value: cititys,
-                                    });
-                                  } catch (err) {
-                                    console.error(err);
-                                  }
-                                };
-                                handler();
-                              }}
-                              options={Constants['prefectures']}
-                              placeholder={'都道府県'}
-                              selectedIconColor={theme.colors.strong}
-                              selectedIconSize={20}
-                              style={StyleSheet.applyWidth(
-                                {
-                                  marginLeft: 30,
-                                  paddingBottom: 0,
-                                  paddingTop: 0,
-                                  width: 180,
-                                },
-                                dimensions.width
-                              )}
-                              type={'solid'}
-                              value={prefecture}
-                            />
-                          );
-                        }}
-                      </SPIG020500Api.FetchSelectPrefecturesGET>
-                      <Picker
-                        autoDismissKeyboard={true}
-                        dropDownBackgroundColor={theme.colors.background}
-                        dropDownBorderColor={theme.colors.divider}
-                        dropDownBorderRadius={8}
-                        dropDownBorderWidth={1}
-                        dropDownTextColor={theme.colors.strong}
-                        iconSize={24}
-                        leftIconMode={'inset'}
-                        mode={'native'}
-                        onValueChange={newPickerValue => {
-                          try {
-                            setCityID(newPickerValue);
-                          } catch (err) {
-                            console.error(err);
-                          }
-                        }}
-                        options={Constants['citys']}
-                        placeholder={'市区町村'}
-                        selectedIconColor={theme.colors.strong}
-                        selectedIconName={'Feather/check'}
-                        selectedIconSize={20}
-                        style={StyleSheet.applyWidth(
-                          {
-                            height: 20,
-                            marginLeft: 10,
-                            paddingBottom: 0,
-                            paddingTop: 0,
-                            width: 180,
-                          },
-                          dimensions.width
-                        )}
-                        type={'solid'}
-                        value={cityID}
-                      />
                     </View>
                   </View>
                 </View>
@@ -2207,12 +2065,14 @@ const SPIG020500Screen = props => {
                           backgroundColor: 'rgb(236, 233, 233)',
                           borderBottomWidth: 1,
                           borderColor: theme.colors['Light'],
+                          borderTopWidth: 1,
                           flexDirection: 'row',
                           height: 32,
                           justifyContent: 'space-between',
                           marginBottom: 10,
                           marginLeft: -16,
                           marginRight: -16,
+                          marginTop: -1,
                           paddingBottom: 5,
                           paddingLeft: 15,
                           paddingTop: 5,
@@ -2579,154 +2439,6 @@ const SPIG020500Screen = props => {
                       >
                         {'150 日経過'}
                       </Text>
-                    </View>
-                    {/* View 12 */}
-                    <View
-                      style={StyleSheet.applyWidth(
-                        {
-                          borderBottomWidth: 1,
-                          borderColor: theme.colors['Light'],
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          marginBottom: 10,
-                          marginLeft: -16,
-                          marginRight: -16,
-                          marginTop: -10,
-                          paddingBottom: 5,
-                          paddingLeft: 16,
-                          paddingRight: 44,
-                          paddingTop: 5,
-                        },
-                        dimensions.width
-                      )}
-                    >
-                      {/* Fetch 2 */}
-                      <SPIG020500Api.FetchSelectPrefecturesGET
-                        handlers={{
-                          onData: fetch2Data => {
-                            const handler = async () => {
-                              try {
-                                const prefectureList = (
-                                  await SPIG020500Api.selectPrefecturesGET(
-                                    Constants
-                                  )
-                                )?.json;
-                                setGlobalVariableValue({
-                                  key: 'prefectures',
-                                  value: prefectureList,
-                                });
-                              } catch (err) {
-                                console.error(err);
-                              }
-                            };
-                            handler();
-                          },
-                        }}
-                      >
-                        {({
-                          loading,
-                          error,
-                          data,
-                          refetchSelectPrefectures,
-                        }) => {
-                          const fetch2Data = data?.json;
-                          if (loading) {
-                            return <ActivityIndicator />;
-                          }
-
-                          if (
-                            error ||
-                            data?.status < 200 ||
-                            data?.status >= 300
-                          ) {
-                            return <ActivityIndicator />;
-                          }
-
-                          return (
-                            <Picker
-                              autoDismissKeyboard={true}
-                              dropDownBackgroundColor={theme.colors.background}
-                              dropDownBorderColor={theme.colors.divider}
-                              dropDownBorderRadius={8}
-                              dropDownBorderWidth={1}
-                              dropDownTextColor={theme.colors.strong}
-                              iconSize={24}
-                              leftIconMode={'inset'}
-                              mode={'native'}
-                              onValueChange={newPickerValue => {
-                                const handler = async () => {
-                                  try {
-                                    setPrefecture(newPickerValue);
-                                    const cititys = (
-                                      await SPIG020500Api.selectCitisGET(
-                                        Constants,
-                                        { prefectureId: newPickerValue }
-                                      )
-                                    )?.json;
-                                    setGlobalVariableValue({
-                                      key: 'citys',
-                                      value: cititys,
-                                    });
-                                  } catch (err) {
-                                    console.error(err);
-                                  }
-                                };
-                                handler();
-                              }}
-                              options={Constants['prefectures']}
-                              placeholder={'都道府県'}
-                              selectedIconColor={theme.colors.strong}
-                              selectedIconSize={20}
-                              style={StyleSheet.applyWidth(
-                                {
-                                  marginLeft: 30,
-                                  paddingBottom: 0,
-                                  paddingTop: 0,
-                                  width: 180,
-                                },
-                                dimensions.width
-                              )}
-                              type={'solid'}
-                              value={prefecture}
-                            />
-                          );
-                        }}
-                      </SPIG020500Api.FetchSelectPrefecturesGET>
-                      <Picker
-                        autoDismissKeyboard={true}
-                        dropDownBackgroundColor={theme.colors.background}
-                        dropDownBorderColor={theme.colors.divider}
-                        dropDownBorderRadius={8}
-                        dropDownBorderWidth={1}
-                        dropDownTextColor={theme.colors.strong}
-                        iconSize={24}
-                        leftIconMode={'inset'}
-                        mode={'native'}
-                        onValueChange={newPickerValue => {
-                          try {
-                            setCityID(newPickerValue);
-                          } catch (err) {
-                            console.error(err);
-                          }
-                        }}
-                        options={Constants['citys']}
-                        placeholder={'市区町村'}
-                        selectedIconColor={theme.colors.strong}
-                        selectedIconName={'Feather/check'}
-                        selectedIconSize={20}
-                        style={StyleSheet.applyWidth(
-                          {
-                            height: 20,
-                            marginLeft: 10,
-                            paddingBottom: 0,
-                            paddingTop: 0,
-                            width: 180,
-                          },
-                          dimensions.width
-                        )}
-                        type={'solid'}
-                        value={cityID}
-                      />
                     </View>
                   </View>
                 </View>
@@ -3537,12 +3249,14 @@ const SPIG020500Screen = props => {
                           backgroundColor: 'rgb(236, 233, 233)',
                           borderBottomWidth: 1,
                           borderColor: theme.colors['Light'],
+                          borderTopWidth: 1,
                           flexDirection: 'row',
                           height: 32,
                           justifyContent: 'space-between',
                           marginBottom: 10,
                           marginLeft: -16,
                           marginRight: -16,
+                          marginTop: -1,
                           paddingBottom: 5,
                           paddingLeft: 15,
                           paddingTop: 5,
@@ -3909,154 +3623,6 @@ const SPIG020500Screen = props => {
                       >
                         {'150 日経過'}
                       </Text>
-                    </View>
-                    {/* View 12 */}
-                    <View
-                      style={StyleSheet.applyWidth(
-                        {
-                          borderBottomWidth: 1,
-                          borderColor: theme.colors['Light'],
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          marginBottom: 10,
-                          marginLeft: -16,
-                          marginRight: -16,
-                          marginTop: -10,
-                          paddingBottom: 5,
-                          paddingLeft: 16,
-                          paddingRight: 44,
-                          paddingTop: 5,
-                        },
-                        dimensions.width
-                      )}
-                    >
-                      {/* Fetch 2 */}
-                      <SPIG020500Api.FetchSelectPrefecturesGET
-                        handlers={{
-                          onData: fetch2Data => {
-                            const handler = async () => {
-                              try {
-                                const prefectureList = (
-                                  await SPIG020500Api.selectPrefecturesGET(
-                                    Constants
-                                  )
-                                )?.json;
-                                setGlobalVariableValue({
-                                  key: 'prefectures',
-                                  value: prefectureList,
-                                });
-                              } catch (err) {
-                                console.error(err);
-                              }
-                            };
-                            handler();
-                          },
-                        }}
-                      >
-                        {({
-                          loading,
-                          error,
-                          data,
-                          refetchSelectPrefectures,
-                        }) => {
-                          const fetch2Data = data?.json;
-                          if (loading) {
-                            return <ActivityIndicator />;
-                          }
-
-                          if (
-                            error ||
-                            data?.status < 200 ||
-                            data?.status >= 300
-                          ) {
-                            return <ActivityIndicator />;
-                          }
-
-                          return (
-                            <Picker
-                              autoDismissKeyboard={true}
-                              dropDownBackgroundColor={theme.colors.background}
-                              dropDownBorderColor={theme.colors.divider}
-                              dropDownBorderRadius={8}
-                              dropDownBorderWidth={1}
-                              dropDownTextColor={theme.colors.strong}
-                              iconSize={24}
-                              leftIconMode={'inset'}
-                              mode={'native'}
-                              onValueChange={newPickerValue => {
-                                const handler = async () => {
-                                  try {
-                                    setPrefecture(newPickerValue);
-                                    const cititys = (
-                                      await SPIG020500Api.selectCitisGET(
-                                        Constants,
-                                        { prefectureId: newPickerValue }
-                                      )
-                                    )?.json;
-                                    setGlobalVariableValue({
-                                      key: 'citys',
-                                      value: cititys,
-                                    });
-                                  } catch (err) {
-                                    console.error(err);
-                                  }
-                                };
-                                handler();
-                              }}
-                              options={Constants['prefectures']}
-                              placeholder={'都道府県'}
-                              selectedIconColor={theme.colors.strong}
-                              selectedIconSize={20}
-                              style={StyleSheet.applyWidth(
-                                {
-                                  marginLeft: 30,
-                                  paddingBottom: 0,
-                                  paddingTop: 0,
-                                  width: 180,
-                                },
-                                dimensions.width
-                              )}
-                              type={'solid'}
-                              value={prefecture}
-                            />
-                          );
-                        }}
-                      </SPIG020500Api.FetchSelectPrefecturesGET>
-                      <Picker
-                        autoDismissKeyboard={true}
-                        dropDownBackgroundColor={theme.colors.background}
-                        dropDownBorderColor={theme.colors.divider}
-                        dropDownBorderRadius={8}
-                        dropDownBorderWidth={1}
-                        dropDownTextColor={theme.colors.strong}
-                        iconSize={24}
-                        leftIconMode={'inset'}
-                        mode={'native'}
-                        onValueChange={newPickerValue => {
-                          try {
-                            setCityID(newPickerValue);
-                          } catch (err) {
-                            console.error(err);
-                          }
-                        }}
-                        options={Constants['citys']}
-                        placeholder={'市区町村'}
-                        selectedIconColor={theme.colors.strong}
-                        selectedIconName={'Feather/check'}
-                        selectedIconSize={20}
-                        style={StyleSheet.applyWidth(
-                          {
-                            height: 20,
-                            marginLeft: 10,
-                            paddingBottom: 0,
-                            paddingTop: 0,
-                            width: 180,
-                          },
-                          dimensions.width
-                        )}
-                        type={'solid'}
-                        value={cityID}
-                      />
                     </View>
                   </View>
                 </View>
@@ -4867,12 +4433,14 @@ const SPIG020500Screen = props => {
                           backgroundColor: 'rgb(236, 233, 233)',
                           borderBottomWidth: 1,
                           borderColor: theme.colors['Light'],
+                          borderTopWidth: 1,
                           flexDirection: 'row',
                           height: 32,
                           justifyContent: 'space-between',
                           marginBottom: 10,
                           marginLeft: -16,
                           marginRight: -16,
+                          marginTop: -1,
                           paddingBottom: 5,
                           paddingLeft: 15,
                           paddingTop: 5,
@@ -5239,154 +4807,6 @@ const SPIG020500Screen = props => {
                       >
                         {'150 日経過'}
                       </Text>
-                    </View>
-                    {/* View 12 */}
-                    <View
-                      style={StyleSheet.applyWidth(
-                        {
-                          borderBottomWidth: 1,
-                          borderColor: theme.colors['Light'],
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          marginBottom: 10,
-                          marginLeft: -16,
-                          marginRight: -16,
-                          marginTop: -10,
-                          paddingBottom: 5,
-                          paddingLeft: 16,
-                          paddingRight: 44,
-                          paddingTop: 5,
-                        },
-                        dimensions.width
-                      )}
-                    >
-                      {/* Fetch 2 */}
-                      <SPIG020500Api.FetchSelectPrefecturesGET
-                        handlers={{
-                          onData: fetch2Data => {
-                            const handler = async () => {
-                              try {
-                                const prefectureList = (
-                                  await SPIG020500Api.selectPrefecturesGET(
-                                    Constants
-                                  )
-                                )?.json;
-                                setGlobalVariableValue({
-                                  key: 'prefectures',
-                                  value: prefectureList,
-                                });
-                              } catch (err) {
-                                console.error(err);
-                              }
-                            };
-                            handler();
-                          },
-                        }}
-                      >
-                        {({
-                          loading,
-                          error,
-                          data,
-                          refetchSelectPrefectures,
-                        }) => {
-                          const fetch2Data = data?.json;
-                          if (loading) {
-                            return <ActivityIndicator />;
-                          }
-
-                          if (
-                            error ||
-                            data?.status < 200 ||
-                            data?.status >= 300
-                          ) {
-                            return <ActivityIndicator />;
-                          }
-
-                          return (
-                            <Picker
-                              autoDismissKeyboard={true}
-                              dropDownBackgroundColor={theme.colors.background}
-                              dropDownBorderColor={theme.colors.divider}
-                              dropDownBorderRadius={8}
-                              dropDownBorderWidth={1}
-                              dropDownTextColor={theme.colors.strong}
-                              iconSize={24}
-                              leftIconMode={'inset'}
-                              mode={'native'}
-                              onValueChange={newPickerValue => {
-                                const handler = async () => {
-                                  try {
-                                    setPrefecture(newPickerValue);
-                                    const cititys = (
-                                      await SPIG020500Api.selectCitisGET(
-                                        Constants,
-                                        { prefectureId: newPickerValue }
-                                      )
-                                    )?.json;
-                                    setGlobalVariableValue({
-                                      key: 'citys',
-                                      value: cititys,
-                                    });
-                                  } catch (err) {
-                                    console.error(err);
-                                  }
-                                };
-                                handler();
-                              }}
-                              options={Constants['prefectures']}
-                              placeholder={'都道府県'}
-                              selectedIconColor={theme.colors.strong}
-                              selectedIconSize={20}
-                              style={StyleSheet.applyWidth(
-                                {
-                                  marginLeft: 30,
-                                  paddingBottom: 0,
-                                  paddingTop: 0,
-                                  width: 180,
-                                },
-                                dimensions.width
-                              )}
-                              type={'solid'}
-                              value={prefecture}
-                            />
-                          );
-                        }}
-                      </SPIG020500Api.FetchSelectPrefecturesGET>
-                      <Picker
-                        autoDismissKeyboard={true}
-                        dropDownBackgroundColor={theme.colors.background}
-                        dropDownBorderColor={theme.colors.divider}
-                        dropDownBorderRadius={8}
-                        dropDownBorderWidth={1}
-                        dropDownTextColor={theme.colors.strong}
-                        iconSize={24}
-                        leftIconMode={'inset'}
-                        mode={'native'}
-                        onValueChange={newPickerValue => {
-                          try {
-                            setCityID(newPickerValue);
-                          } catch (err) {
-                            console.error(err);
-                          }
-                        }}
-                        options={Constants['citys']}
-                        placeholder={'市区町村'}
-                        selectedIconColor={theme.colors.strong}
-                        selectedIconName={'Feather/check'}
-                        selectedIconSize={20}
-                        style={StyleSheet.applyWidth(
-                          {
-                            height: 20,
-                            marginLeft: 10,
-                            paddingBottom: 0,
-                            paddingTop: 0,
-                            width: 180,
-                          },
-                          dimensions.width
-                        )}
-                        type={'solid'}
-                        value={cityID}
-                      />
                     </View>
                   </View>
                 </View>
@@ -6197,12 +5617,14 @@ const SPIG020500Screen = props => {
                           backgroundColor: 'rgb(236, 233, 233)',
                           borderBottomWidth: 1,
                           borderColor: theme.colors['Light'],
+                          borderTopWidth: 1,
                           flexDirection: 'row',
                           height: 32,
                           justifyContent: 'space-between',
                           marginBottom: 10,
                           marginLeft: -16,
                           marginRight: -16,
+                          marginTop: -1,
                           paddingBottom: 5,
                           paddingLeft: 15,
                           paddingTop: 5,
@@ -6569,154 +5991,6 @@ const SPIG020500Screen = props => {
                       >
                         {'150 日経過'}
                       </Text>
-                    </View>
-                    {/* View 12 */}
-                    <View
-                      style={StyleSheet.applyWidth(
-                        {
-                          borderBottomWidth: 1,
-                          borderColor: theme.colors['Light'],
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          marginBottom: 10,
-                          marginLeft: -16,
-                          marginRight: -16,
-                          marginTop: -10,
-                          paddingBottom: 5,
-                          paddingLeft: 16,
-                          paddingRight: 44,
-                          paddingTop: 5,
-                        },
-                        dimensions.width
-                      )}
-                    >
-                      {/* Fetch 2 */}
-                      <SPIG020500Api.FetchSelectPrefecturesGET
-                        handlers={{
-                          onData: fetch2Data => {
-                            const handler = async () => {
-                              try {
-                                const prefectureList = (
-                                  await SPIG020500Api.selectPrefecturesGET(
-                                    Constants
-                                  )
-                                )?.json;
-                                setGlobalVariableValue({
-                                  key: 'prefectures',
-                                  value: prefectureList,
-                                });
-                              } catch (err) {
-                                console.error(err);
-                              }
-                            };
-                            handler();
-                          },
-                        }}
-                      >
-                        {({
-                          loading,
-                          error,
-                          data,
-                          refetchSelectPrefectures,
-                        }) => {
-                          const fetch2Data = data?.json;
-                          if (loading) {
-                            return <ActivityIndicator />;
-                          }
-
-                          if (
-                            error ||
-                            data?.status < 200 ||
-                            data?.status >= 300
-                          ) {
-                            return <ActivityIndicator />;
-                          }
-
-                          return (
-                            <Picker
-                              autoDismissKeyboard={true}
-                              dropDownBackgroundColor={theme.colors.background}
-                              dropDownBorderColor={theme.colors.divider}
-                              dropDownBorderRadius={8}
-                              dropDownBorderWidth={1}
-                              dropDownTextColor={theme.colors.strong}
-                              iconSize={24}
-                              leftIconMode={'inset'}
-                              mode={'native'}
-                              onValueChange={newPickerValue => {
-                                const handler = async () => {
-                                  try {
-                                    setPrefecture(newPickerValue);
-                                    const cititys = (
-                                      await SPIG020500Api.selectCitisGET(
-                                        Constants,
-                                        { prefectureId: newPickerValue }
-                                      )
-                                    )?.json;
-                                    setGlobalVariableValue({
-                                      key: 'citys',
-                                      value: cititys,
-                                    });
-                                  } catch (err) {
-                                    console.error(err);
-                                  }
-                                };
-                                handler();
-                              }}
-                              options={Constants['prefectures']}
-                              placeholder={'都道府県'}
-                              selectedIconColor={theme.colors.strong}
-                              selectedIconSize={20}
-                              style={StyleSheet.applyWidth(
-                                {
-                                  marginLeft: 30,
-                                  paddingBottom: 0,
-                                  paddingTop: 0,
-                                  width: 180,
-                                },
-                                dimensions.width
-                              )}
-                              type={'solid'}
-                              value={prefecture}
-                            />
-                          );
-                        }}
-                      </SPIG020500Api.FetchSelectPrefecturesGET>
-                      <Picker
-                        autoDismissKeyboard={true}
-                        dropDownBackgroundColor={theme.colors.background}
-                        dropDownBorderColor={theme.colors.divider}
-                        dropDownBorderRadius={8}
-                        dropDownBorderWidth={1}
-                        dropDownTextColor={theme.colors.strong}
-                        iconSize={24}
-                        leftIconMode={'inset'}
-                        mode={'native'}
-                        onValueChange={newPickerValue => {
-                          try {
-                            setCityID(newPickerValue);
-                          } catch (err) {
-                            console.error(err);
-                          }
-                        }}
-                        options={Constants['citys']}
-                        placeholder={'市区町村'}
-                        selectedIconColor={theme.colors.strong}
-                        selectedIconName={'Feather/check'}
-                        selectedIconSize={20}
-                        style={StyleSheet.applyWidth(
-                          {
-                            height: 20,
-                            marginLeft: 10,
-                            paddingBottom: 0,
-                            paddingTop: 0,
-                            width: 180,
-                          },
-                          dimensions.width
-                        )}
-                        type={'solid'}
-                        value={cityID}
-                      />
                     </View>
                   </View>
                 </View>

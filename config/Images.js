@@ -12,4 +12,8 @@ export default {
   Snipaste2: require('../assets/images/Snipaste2.png'),
   User: require('../assets/images/User.png'),
   _193485: require('../assets/images/193485.jpg'),
+  Snipaste: require('../assets/images/Snipaste.png'),
+  MapBlue: require('../assets/images/MapBlue.png'),
+  PhoneBlue: require('../assets/images/PhoneBlue.png'),
+  MsgBlue: require('../assets/images/MsgBlue.png'),
 };

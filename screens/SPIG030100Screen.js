@@ -1,27 +1,33 @@
 import React from 'react';
 import * as GlobalStyles from '../GlobalStyles.js';
+import * as SPIG030000Api from '../apis/SPIG030000Api.js';
 import * as GlobalVariables from '../config/GlobalVariableContext';
 import Breakpoints from '../utils/Breakpoints';
 import * as StyleSheet from '../utils/StyleSheet';
 import {
+  HStack,
   Icon,
   Pressable,
   ScreenContainer,
   Spacer,
+  VStack,
   withTheme,
 } from '@draftbit/ui';
 import { useIsFocused } from '@react-navigation/native';
 import {
+  ActivityIndicator,
   Alert,
+  FlatList,
   ScrollView,
   Text,
   View,
   useWindowDimensions,
 } from 'react-native';
+import { Fetch } from 'react-request';
 
 const SPIG030100Screen = props => {
   const dimensions = useWindowDimensions();
-  const { theme } = props;
+  const { theme, navigation } = props;
   const Constants = GlobalVariables.useValues();
   const Variables = Constants;
   const setGlobalVariableValue = GlobalVariables.useSetValue();
@@ -189,28 +195,6 @@ line two` ) and will not work with special characters inside of quotes ( example
 
   return (
     <ScreenContainer hasSafeArea={false} scrollable={false}>
-      {/* tittle */}
-      <View
-        style={StyleSheet.applyWidth(
-          { alignItems: 'center', height: 32, justifyContent: 'flex-end' },
-          dimensions.width
-        )}
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          style={StyleSheet.applyWidth(
-            StyleSheet.compose(GlobalStyles.TextStyles(theme)['tittleText'], {
-              fontFamily: 'System',
-              fontSize: 16,
-              fontWeight: '700',
-            }),
-            dimensions.width
-          )}
-        >
-          {'スケジュール'}
-        </Text>
-      </View>
       {/* Scroll View Week */}
       <>
         {!Constants['IsTrue'] ? null : (
@@ -219,6 +203,31 @@ line two` ) and will not work with special characters inside of quotes ( example
             showsHorizontalScrollIndicator={true}
             showsVerticalScrollIndicator={true}
           >
+            {/* tittle */}
+            <View
+              style={StyleSheet.applyWidth(
+                {
+                  alignItems: 'center',
+                  height: 32,
+                  justifyContent: 'flex-end',
+                },
+                dimensions.width
+              )}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                style={StyleSheet.applyWidth(
+                  StyleSheet.compose(
+                    GlobalStyles.TextStyles(theme)['tittleText'],
+                    { fontFamily: 'System', fontSize: 16, fontWeight: '700' }
+                  ),
+                  dimensions.width
+                )}
+              >
+                {'スケジュール'}
+              </Text>
+            </View>
             {/* top */}
             <View
               style={StyleSheet.applyWidth(
@@ -371,6 +380,13 @@ line two` ) and will not work with special characters inside of quotes ( example
               >
                 {/* leftButton */}
                 <Pressable
+                  onPress={() => {
+                    try {
+                      navigation.navigate('SPIG030200Screen');
+                    } catch (err) {
+                      console.error(err);
+                    }
+                  }}
                   style={StyleSheet.applyWidth(
                     {
                       borderColor: theme.colors['Medium'],
@@ -449,6 +465,15 @@ line two` ) and will not work with special characters inside of quotes ( example
                 </Pressable>
                 {/* rightButton */}
                 <Pressable
+                  onPress={() => {
+                    try {
+                      navigation.navigate('SPaMobile', {
+                        screen: 'SPIG030000Screen',
+                      });
+                    } catch (err) {
+                      console.error(err);
+                    }
+                  }}
                   style={StyleSheet.applyWidth(
                     {
                       borderColor: theme.colors['Medium'],
@@ -516,7 +541,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                       {
                         borderColor: 'rgb(228, 228, 228)',
                         borderWidth: 1,
-                        height: 80,
+                        height: 60,
                       },
                       dimensions.width
                     )}
@@ -547,6 +572,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -562,7 +589,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                               {
                                 color: 'rgb(0, 102, 204)',
                                 fontFamily: 'System',
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: '700',
                                 letterSpacing: 1,
                               }
@@ -578,6 +605,9 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
+                            borderStyle: 'solid',
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -593,7 +623,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                               {
                                 color: 'rgb(0, 102, 204)',
                                 fontFamily: 'System',
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: '700',
                                 letterSpacing: 1,
                               }
@@ -609,6 +639,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -624,7 +656,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                               {
                                 color: 'rgb(0, 102, 204)',
                                 fontFamily: 'System',
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: '700',
                                 letterSpacing: 1,
                               }
@@ -640,6 +672,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -655,7 +689,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                               {
                                 color: 'rgb(0, 102, 204)',
                                 fontFamily: 'System',
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: '700',
                                 letterSpacing: 1,
                               }
@@ -671,6 +705,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -686,7 +722,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                               {
                                 color: 'rgb(0, 102, 204)',
                                 fontFamily: 'System',
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: '700',
                                 letterSpacing: 1,
                               }
@@ -702,6 +738,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -717,7 +755,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                               {
                                 color: 'rgb(0, 102, 204)',
                                 fontFamily: 'System',
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: '700',
                                 letterSpacing: 1,
                               }
@@ -733,6 +771,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -748,7 +788,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                               {
                                 color: 'rgb(0, 102, 204)',
                                 fontFamily: 'System',
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: '700',
                                 letterSpacing: 1,
                               }
@@ -767,7 +807,7 @@ line two` ) and will not work with special characters inside of quotes ( example
                           borderBottomWidth: 1,
                           borderColor: 'rgb(228, 228, 228)',
                           flexDirection: 'row',
-                          height: '35%',
+                          height: '65%',
                         },
                         dimensions.width
                       )}
@@ -782,11 +822,24 @@ line two` ) and will not work with special characters inside of quotes ( example
                           dimensions.width
                         )}
                       >
+                        {/* TextEndDate */}
                         <Text
                           accessible={true}
                           allowFontScaling={true}
                           style={StyleSheet.applyWidth(
-                            GlobalStyles.TextStyles(theme)['Text'],
+                            StyleSheet.compose(
+                              GlobalStyles.TextStyles(theme)['Text'],
+                              {
+                                alignSelf: 'center',
+                                color: 'rgb(0, 102, 204)',
+                                fontFamily: 'System',
+                                fontSize: 15,
+                                fontWeight: '700',
+                                letterSpacing: 1,
+                                marginTop: 10,
+                                textAlign: 'auto',
+                              }
+                            ),
                             dimensions.width
                           )}
                         >
@@ -798,6 +851,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -829,6 +884,10 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            backgroundColor: theme.colors['Custom Color_23'],
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
+                            borderStyle: 'solid',
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -860,6 +919,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -891,6 +952,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -922,6 +985,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -953,6 +1018,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -984,6 +1051,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
+                            borderColor: theme.colors['Custom Color_23'],
+                            borderRightWidth: 1,
                             justifyContent: 'center',
                             width: '12.5%',
                           },
@@ -1014,6 +1083,380 @@ line two` ) and will not work with special characters inside of quotes ( example
                   </View>
                 </View>
                 <Spacer bottom={2} left={8} right={8} top={2} />
+                <ScrollView
+                  bounces={true}
+                  showsHorizontalScrollIndicator={true}
+                  showsVerticalScrollIndicator={true}
+                  style={StyleSheet.applyWidth(
+                    { width: '12.5%' },
+                    dimensions.width
+                  )}
+                  contentContainerStyle={StyleSheet.applyWidth(
+                    {
+                      borderColor: theme.colors['Custom Color_23'],
+                      borderTopWidth: 1,
+                      position: 'relative',
+                    },
+                    dimensions.width
+                  )}
+                >
+                  <SPIG030000Api.FetchSelectWorkTimeGET>
+                    {({ loading, error, data, refetchSelectWorkTime }) => {
+                      const fetchData = data?.json;
+                      if (loading) {
+                        return <ActivityIndicator />;
+                      }
+
+                      if (error || data?.status < 200 || data?.status >= 300) {
+                        return <ActivityIndicator />;
+                      }
+
+                      return (
+                        <FlatList
+                          data={fetchData}
+                          keyExtractor={listData =>
+                            listData?.id ||
+                            listData?.uuid ||
+                            JSON.stringify(listData)
+                          }
+                          listKey={'Nos5aB7z'}
+                          numColumns={1}
+                          onEndReachedThreshold={0.5}
+                          renderItem={({ item }) => {
+                            const listData = item;
+                            return (
+                              <VStack
+                                style={StyleSheet.applyWidth(
+                                  StyleSheet.compose(
+                                    GlobalStyles.VStackStyles(theme)['V Stack'],
+                                    {
+                                      borderColor:
+                                        theme.colors['Custom Color_23'],
+                                      borderLeftWidth: 1,
+                                      borderRightWidth: 1,
+                                      height: 50,
+                                    }
+                                  ),
+                                  dimensions.width
+                                )}
+                              >
+                                <HStack
+                                  style={StyleSheet.applyWidth(
+                                    StyleSheet.compose(
+                                      GlobalStyles.HStackStyles(theme)[
+                                        'H Stack'
+                                      ],
+                                      {
+                                        borderBottomWidth: 1,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        height: '50%',
+                                      }
+                                    ),
+                                    dimensions.width
+                                  )}
+                                >
+                                  <View>
+                                    <Text
+                                      accessible={true}
+                                      allowFontScaling={true}
+                                      style={StyleSheet.applyWidth(
+                                        GlobalStyles.TextStyles(theme)['Text'],
+                                        dimensions.width
+                                      )}
+                                    >
+                                      {listData?.timeH}
+                                      {'時\n'}
+                                    </Text>
+                                  </View>
+                                  {/* View 2 */}
+                                  <>
+                                    {!(
+                                      (listData?.isWorkTime ===
+                                        Constants['IsTrue'] && isTodayFlg) ===
+                                      Constants['IsTrue']
+                                    ) ? null : (
+                                      <View
+                                        style={StyleSheet.applyWidth(
+                                          {
+                                            backgroundColor:
+                                              theme.colors['Custom Color_23'],
+                                          },
+                                          dimensions.width
+                                        )}
+                                      />
+                                    )}
+                                  </>
+                                  {/* View 3 */}
+                                  <>
+                                    {!(
+                                      listData?.isWorkTime ===
+                                      Constants['IsFalse']
+                                    ) ? null : (
+                                      <View
+                                        style={StyleSheet.applyWidth(
+                                          {
+                                            backgroundColor:
+                                              theme.colors['Custom Color_23'],
+                                          },
+                                          dimensions.width
+                                        )}
+                                      />
+                                    )}
+                                  </>
+                                </HStack>
+                                {/* H Stack 2 */}
+                                <HStack
+                                  style={StyleSheet.applyWidth(
+                                    StyleSheet.compose(
+                                      GlobalStyles.HStackStyles(theme)[
+                                        'H Stack'
+                                      ],
+                                      {
+                                        borderBottomWidth: 1,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        height: '50%',
+                                      }
+                                    ),
+                                    dimensions.width
+                                  )}
+                                >
+                                  <View />
+                                  {/* View 2 */}
+                                  <>
+                                    {!(
+                                      (listData?.isWorkTime ===
+                                        Constants['IsTrue'] && isTodayFlg) ===
+                                      Constants['IsTrue']
+                                    ) ? null : (
+                                      <View
+                                        style={StyleSheet.applyWidth(
+                                          {
+                                            backgroundColor:
+                                              theme.colors['Custom Color_23'],
+                                          },
+                                          dimensions.width
+                                        )}
+                                      />
+                                    )}
+                                  </>
+                                  {/* View 3 */}
+                                  <>
+                                    {!(
+                                      listData?.isWorkTime ===
+                                      Constants['IsFalse']
+                                    ) ? null : (
+                                      <View
+                                        style={StyleSheet.applyWidth(
+                                          {
+                                            backgroundColor:
+                                              theme.colors['Custom Color_23'],
+                                          },
+                                          dimensions.width
+                                        )}
+                                      />
+                                    )}
+                                  </>
+                                </HStack>
+                              </VStack>
+                            );
+                          }}
+                          showsHorizontalScrollIndicator={true}
+                          showsVerticalScrollIndicator={true}
+                        />
+                      );
+                    }}
+                  </SPIG030000Api.FetchSelectWorkTimeGET>
+                </ScrollView>
+                {/* Scroll View 2 */}
+                <ScrollView
+                  bounces={true}
+                  showsHorizontalScrollIndicator={true}
+                  showsVerticalScrollIndicator={true}
+                  style={StyleSheet.applyWidth(
+                    { width: '12.5%' },
+                    dimensions.width
+                  )}
+                  contentContainerStyle={StyleSheet.applyWidth(
+                    {
+                      borderColor: theme.colors['Custom Color_23'],
+                      borderTopWidth: 1,
+                      flexDirection: 'column',
+                      flexWrap: 'nowrap',
+                      position: 'relative',
+                    },
+                    dimensions.width
+                  )}
+                >
+                  <SPIG030000Api.FetchSelectWorkTimeGET>
+                    {({ loading, error, data, refetchSelectWorkTime }) => {
+                      const fetchData = data?.json;
+                      if (loading) {
+                        return <ActivityIndicator />;
+                      }
+
+                      if (error || data?.status < 200 || data?.status >= 300) {
+                        return <ActivityIndicator />;
+                      }
+
+                      return (
+                        <FlatList
+                          data={fetchData}
+                          keyExtractor={listData =>
+                            listData?.id ||
+                            listData?.uuid ||
+                            JSON.stringify(listData)
+                          }
+                          listKey={'gDXbXWLJ'}
+                          numColumns={1}
+                          onEndReachedThreshold={0.5}
+                          renderItem={({ item }) => {
+                            const listData = item;
+                            return (
+                              <VStack
+                                style={StyleSheet.applyWidth(
+                                  StyleSheet.compose(
+                                    GlobalStyles.VStackStyles(theme)['V Stack'],
+                                    {
+                                      borderColor:
+                                        theme.colors['Custom Color_23'],
+                                      borderLeftWidth: 1,
+                                      borderRightWidth: 1,
+                                      height: 50,
+                                    }
+                                  ),
+                                  dimensions.width
+                                )}
+                              >
+                                <HStack
+                                  style={StyleSheet.applyWidth(
+                                    StyleSheet.compose(
+                                      GlobalStyles.HStackStyles(theme)[
+                                        'H Stack'
+                                      ],
+                                      {
+                                        borderBottomWidth: 1,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        height: '50%',
+                                      }
+                                    ),
+                                    dimensions.width
+                                  )}
+                                >
+                                  <View>
+                                    <Text
+                                      accessible={true}
+                                      allowFontScaling={true}
+                                      style={StyleSheet.applyWidth(
+                                        GlobalStyles.TextStyles(theme)['Text'],
+                                        dimensions.width
+                                      )}
+                                    >
+                                      {'\n'}
+                                    </Text>
+                                  </View>
+                                  {/* View 2 */}
+                                  <>
+                                    {!(
+                                      (listData?.isWorkTime ===
+                                        Constants['IsTrue'] && isTodayFlg) ===
+                                      Constants['IsTrue']
+                                    ) ? null : (
+                                      <View
+                                        style={StyleSheet.applyWidth(
+                                          {
+                                            backgroundColor:
+                                              theme.colors['Custom Color_23'],
+                                          },
+                                          dimensions.width
+                                        )}
+                                      />
+                                    )}
+                                  </>
+                                  {/* View 3 */}
+                                  <>
+                                    {!(
+                                      listData?.isWorkTime ===
+                                      Constants['IsFalse']
+                                    ) ? null : (
+                                      <View
+                                        style={StyleSheet.applyWidth(
+                                          {
+                                            backgroundColor:
+                                              theme.colors['Custom Color_23'],
+                                          },
+                                          dimensions.width
+                                        )}
+                                      />
+                                    )}
+                                  </>
+                                </HStack>
+                                {/* H Stack 2 */}
+                                <HStack
+                                  style={StyleSheet.applyWidth(
+                                    StyleSheet.compose(
+                                      GlobalStyles.HStackStyles(theme)[
+                                        'H Stack'
+                                      ],
+                                      {
+                                        borderBottomWidth: 1,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        height: '50%',
+                                      }
+                                    ),
+                                    dimensions.width
+                                  )}
+                                >
+                                  <View />
+                                  {/* View 2 */}
+                                  <>
+                                    {!(
+                                      (listData?.isWorkTime ===
+                                        Constants['IsTrue'] && isTodayFlg) ===
+                                      Constants['IsTrue']
+                                    ) ? null : (
+                                      <View
+                                        style={StyleSheet.applyWidth(
+                                          {
+                                            backgroundColor:
+                                              theme.colors['Custom Color_23'],
+                                          },
+                                          dimensions.width
+                                        )}
+                                      />
+                                    )}
+                                  </>
+                                  {/* View 3 */}
+                                  <>
+                                    {!(
+                                      listData?.isWorkTime ===
+                                      Constants['IsFalse']
+                                    ) ? null : (
+                                      <View
+                                        style={StyleSheet.applyWidth(
+                                          {
+                                            backgroundColor:
+                                              theme.colors['Custom Color_23'],
+                                          },
+                                          dimensions.width
+                                        )}
+                                      />
+                                    )}
+                                  </>
+                                </HStack>
+                              </VStack>
+                            );
+                          }}
+                          showsHorizontalScrollIndicator={true}
+                          showsVerticalScrollIndicator={true}
+                        />
+                      );
+                    }}
+                  </SPIG030000Api.FetchSelectWorkTimeGET>
+                </ScrollView>
               </View>
             </View>
           </ScrollView>

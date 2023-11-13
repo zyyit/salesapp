@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import theme from './themes/Draftbit.js';
 import LinkingConfiguration from './LinkingConfiguration.js';
 
+import ProvinecScreen from './screens/ProvinecScreen';
 import SPIG010000Screen from './screens/SPIG010000Screen';
 import SPIG020000Screen from './screens/SPIG020000Screen';
 import SPIG020100Screen from './screens/SPIG020100Screen';
@@ -249,6 +250,13 @@ export default function RootAppNavigator() {
           component={SPIG030100Screen}
           options={{
             title: 'SPIG030100',
+          }}
+        />
+        <Stack.Screen
+          name="ProvinecScreen"
+          component={ProvinecScreen}
+          options={{
+            title: 'provinec',
           }}
         />
         <Stack.Screen name="SPaMobile" component={SPaMobile} />

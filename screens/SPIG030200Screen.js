@@ -525,14 +525,20 @@ line two` ) and will not work with special characters inside of quotes ( example
               {/* week */}
               <View
                 style={StyleSheet.applyWidth(
-                  { flexDirection: 'row' },
+                  { flexDirection: 'row', marginLeft: 9, marginTop: 5 },
                   dimensions.width
                 )}
               >
                 {/* seven */}
                 <View
                   style={StyleSheet.applyWidth(
-                    { width: '14.2%' },
+                    {
+                      alignItems: 'center',
+                      alignSelf: 'auto',
+                      borderColor: theme.colors['Custom Color_23'],
+                      borderWidth: 1,
+                      width: '14%',
+                    },
                     dimensions.width
                   )}
                 >
@@ -540,7 +546,10 @@ line two` ) and will not work with special characters inside of quotes ( example
                     accessible={true}
                     allowFontScaling={true}
                     style={StyleSheet.applyWidth(
-                      GlobalStyles.TextStyles(theme)['Text'],
+                      StyleSheet.compose(
+                        GlobalStyles.TextStyles(theme)['Text'],
+                        { color: theme.colors['Boder_1'] }
+                      ),
                       dimensions.width
                     )}
                   >
@@ -550,7 +559,12 @@ line two` ) and will not work with special characters inside of quotes ( example
                 {/* one */}
                 <View
                   style={StyleSheet.applyWidth(
-                    { width: '14.2%' },
+                    {
+                      alignItems: 'center',
+                      borderColor: theme.colors['Custom Color_23'],
+                      borderWidth: 1,
+                      width: '14%',
+                    },
                     dimensions.width
                   )}
                 >
@@ -558,7 +572,10 @@ line two` ) and will not work with special characters inside of quotes ( example
                     accessible={true}
                     allowFontScaling={true}
                     style={StyleSheet.applyWidth(
-                      GlobalStyles.TextStyles(theme)['Text'],
+                      StyleSheet.compose(
+                        GlobalStyles.TextStyles(theme)['Text'],
+                        { color: theme.colors['Boder_1'] }
+                      ),
                       dimensions.width
                     )}
                   >
@@ -568,7 +585,12 @@ line two` ) and will not work with special characters inside of quotes ( example
                 {/* two */}
                 <View
                   style={StyleSheet.applyWidth(
-                    { width: '14.2%' },
+                    {
+                      alignItems: 'center',
+                      borderColor: theme.colors['Custom Color_23'],
+                      borderWidth: 1,
+                      width: '14%',
+                    },
                     dimensions.width
                   )}
                 >
@@ -576,7 +598,10 @@ line two` ) and will not work with special characters inside of quotes ( example
                     accessible={true}
                     allowFontScaling={true}
                     style={StyleSheet.applyWidth(
-                      GlobalStyles.TextStyles(theme)['Text'],
+                      StyleSheet.compose(
+                        GlobalStyles.TextStyles(theme)['Text'],
+                        { color: theme.colors['Boder_1'] }
+                      ),
                       dimensions.width
                     )}
                   >
@@ -586,7 +611,12 @@ line two` ) and will not work with special characters inside of quotes ( example
                 {/* three */}
                 <View
                   style={StyleSheet.applyWidth(
-                    { width: '14.2%' },
+                    {
+                      alignItems: 'center',
+                      borderColor: theme.colors['Custom Color_23'],
+                      borderWidth: 1,
+                      width: '14%',
+                    },
                     dimensions.width
                   )}
                 >
@@ -594,7 +624,10 @@ line two` ) and will not work with special characters inside of quotes ( example
                     accessible={true}
                     allowFontScaling={true}
                     style={StyleSheet.applyWidth(
-                      GlobalStyles.TextStyles(theme)['Text'],
+                      StyleSheet.compose(
+                        GlobalStyles.TextStyles(theme)['Text'],
+                        { color: theme.colors['Boder_1'] }
+                      ),
                       dimensions.width
                     )}
                   >
@@ -604,7 +637,12 @@ line two` ) and will not work with special characters inside of quotes ( example
                 {/* four */}
                 <View
                   style={StyleSheet.applyWidth(
-                    { width: '14.2%' },
+                    {
+                      alignItems: 'center',
+                      borderColor: theme.colors['Custom Color_23'],
+                      borderWidth: 1,
+                      width: '14%',
+                    },
                     dimensions.width
                   )}
                 >
@@ -612,7 +650,10 @@ line two` ) and will not work with special characters inside of quotes ( example
                     accessible={true}
                     allowFontScaling={true}
                     style={StyleSheet.applyWidth(
-                      GlobalStyles.TextStyles(theme)['Text'],
+                      StyleSheet.compose(
+                        GlobalStyles.TextStyles(theme)['Text'],
+                        { color: theme.colors['Boder_1'] }
+                      ),
                       dimensions.width
                     )}
                   >
@@ -622,7 +663,12 @@ line two` ) and will not work with special characters inside of quotes ( example
                 {/* five */}
                 <View
                   style={StyleSheet.applyWidth(
-                    { width: '14.2%' },
+                    {
+                      alignItems: 'center',
+                      borderColor: theme.colors['Custom Color_23'],
+                      borderWidth: 1,
+                      width: '14%',
+                    },
                     dimensions.width
                   )}
                 >
@@ -630,7 +676,10 @@ line two` ) and will not work with special characters inside of quotes ( example
                     accessible={true}
                     allowFontScaling={true}
                     style={StyleSheet.applyWidth(
-                      GlobalStyles.TextStyles(theme)['Text'],
+                      StyleSheet.compose(
+                        GlobalStyles.TextStyles(theme)['Text'],
+                        { color: theme.colors['Boder_1'] }
+                      ),
                       dimensions.width
                     )}
                   >
@@ -640,7 +689,12 @@ line two` ) and will not work with special characters inside of quotes ( example
                 {/* six */}
                 <View
                   style={StyleSheet.applyWidth(
-                    { width: 14.2 },
+                    {
+                      alignItems: 'center',
+                      borderColor: theme.colors['Custom Color_23'],
+                      borderWidth: 1,
+                      width: '14%',
+                    },
                     dimensions.width
                   )}
                 >
@@ -648,7 +702,10 @@ line two` ) and will not work with special characters inside of quotes ( example
                     accessible={true}
                     allowFontScaling={true}
                     style={StyleSheet.applyWidth(
-                      GlobalStyles.TextStyles(theme)['Text'],
+                      StyleSheet.compose(
+                        GlobalStyles.TextStyles(theme)['Text'],
+                        { color: theme.colors['Boder_1'] }
+                      ),
                       dimensions.width
                     )}
                   >
