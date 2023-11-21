@@ -32,6 +32,87 @@ const SPIG030100Screen = props => {
   const Variables = Constants;
   const setGlobalVariableValue = GlobalVariables.useSetValue();
 
+  const showContent = time => {
+    return true;
+  };
+
+  const weekTopDate = (Variables, initFlg) => {
+    let daysArr = new Array();
+    const weekDays = ['日', '月', '火', '水', '木', '金', '土'];
+    let weekday = '';
+    if (initFlg) {
+      console.log('初期化');
+      const newDay = new Date();
+      daysArr = setWeekDate(newDay);
+      weekday = weekDays[newDay.getDay() + 1];
+      switch (weekday) {
+        case '日':
+          setColorSun('#EDE9D6');
+          break;
+        case '月':
+          setColorMon('#EDE9D6');
+          break;
+        case '火':
+          setColorTue('#EDE9D6');
+          break;
+        case '水':
+          setColorWeb('#EDE9D6');
+          break;
+        case '木':
+          setColorThur('#EDE9D6');
+          break;
+        case '金':
+          setColorFri('#EDE9D6');
+          break;
+        case '土':
+          setColorSat('#EDE9D6');
+          break;
+      }
+    } else {
+      console.log('点击后');
+      const newDay = thisDay;
+      daysArr = setWeekDate(newDay);
+      const nowDate = new Date();
+      weekday = weekDays[newDay.getDay() + 1];
+      if (newDay.getDate() == nowDate.getDate()) {
+        switch (weekday) {
+          case '日':
+            setColorSun('#EDE9D6');
+            break;
+          case '月':
+            setColorMon('#EDE9D6');
+            break;
+          case '火':
+            setColorTue('#EDE9D6');
+            break;
+          case '水':
+            setColorWeb('#EDE9D6');
+            break;
+          case '木':
+            setColorThur('#EDE9D6');
+            break;
+          case '金':
+            setColorFri('#EDE9D6');
+            break;
+          case '土':
+            setColorSat('#EDE9D6');
+            break;
+        }
+      } else {
+        setColorMon('#DEDEDE');
+        setColorSun('White');
+        setColorMon('White');
+        setColorTue('White');
+        setColorWeb('White');
+        setColorThur('White');
+        setColorFri('White');
+        setColorSat('White');
+      }
+    }
+    console.log('这周的日期：' + daysArr);
+    setDay(daysArr);
+  };
+
   const setTodayText = async dateFlg => {
     // Type the code for the body of your function or hook here.
     // Functions can be triggered via Button/Touchable actions.
@@ -115,21 +196,6 @@ line two` ) and will not work with special characters inside of quotes ( example
     console.log('contentData2' + contentData);
   };
 
-  const weekTopDate = (Variables, initFlg) => {
-    let daysArr = new Array();
-    if (initFlg) {
-      console.log('初期化');
-      const newDay = new Date();
-      daysArr = setWeekDate(newDay);
-    } else {
-      console.log('点击后');
-      const newDay = thisDay;
-      daysArr = setWeekDate(newDay);
-    }
-    console.log('这周的日期：' + daysArr);
-    setDay(daysArr);
-  };
-
   const setWeekDate = newDay => {
     let weekday = '';
     const weekDays = ['日', '月', '火', '水', '木', '金', '土'];
@@ -142,7 +208,7 @@ line two` ) and will not work with special characters inside of quotes ( example
         index = i;
       }
     }
-    console.log('今天是周' + index);
+    console.log('今天是周' + (index + 1));
     for (let j = 0; j < weekDays.length; j++) {
       arrDay.setDate(newDay.getDate() + (j - index));
       daysArr.push(arrDay.getDate().toString() + '(' + weekDays[j] + ')');
@@ -183,6 +249,15 @@ line two` ) and will not work with special characters inside of quotes ( example
       console.error(err);
     }
   }, [isFocused]);
+  const [colorFri, setColorFri] = React.useState('White');
+  const [colorMon, setColorMon] = React.useState(
+    theme.colors['Custom Color_24']
+  );
+  const [colorSat, setColorSat] = React.useState('White');
+  const [colorSun, setColorSun] = React.useState('White');
+  const [colorThur, setColorThur] = React.useState('White');
+  const [colorTue, setColorTue] = React.useState('White');
+  const [colorWeb, setColorWeb] = React.useState('White');
   const [contentData, setContentData] = React.useState([]);
   const [day, setDay] = React.useState([]);
   const [isDayFlg, setIsDayFlg] = React.useState(Constants['IsTrue']);
@@ -884,11 +959,18 @@ line two` ) and will not work with special characters inside of quotes ( example
                         style={StyleSheet.applyWidth(
                           {
                             alignItems: 'center',
-                            backgroundColor: theme.colors['Custom Color_23'],
+                            backgroundColor: [
+                              {
+                                minWidth: Breakpoints.Mobile,
+                                value: theme.colors['Custom Color_24'],
+                              },
+                              { minWidth: Breakpoints.Mobile, value: colorMon },
+                            ],
                             borderColor: theme.colors['Custom Color_23'],
                             borderRightWidth: 1,
                             borderStyle: 'solid',
                             justifyContent: 'center',
+                            opacity: 1,
                             width: '12.5%',
                           },
                           dimensions.width
@@ -1085,20 +1167,17 @@ line two` ) and will not work with special characters inside of quotes ( example
                 <Spacer bottom={2} left={8} right={8} top={2} />
                 <ScrollView
                   bounces={true}
-                  showsHorizontalScrollIndicator={true}
-                  showsVerticalScrollIndicator={true}
-                  style={StyleSheet.applyWidth(
-                    { width: '12.5%' },
-                    dimensions.width
-                  )}
                   contentContainerStyle={StyleSheet.applyWidth(
                     {
+                      alignSelf: 'auto',
                       borderColor: theme.colors['Custom Color_23'],
                       borderTopWidth: 1,
                       position: 'relative',
                     },
                     dimensions.width
                   )}
+                  showsHorizontalScrollIndicator={true}
+                  showsVerticalScrollIndicator={true}
                 >
                   <SPIG030000Api.FetchSelectWorkTimeGET>
                     {({ loading, error, data, refetchSelectWorkTime }) => {
@@ -1134,7 +1213,8 @@ line two` ) and will not work with special characters inside of quotes ( example
                                         theme.colors['Custom Color_23'],
                                       borderLeftWidth: 1,
                                       borderRightWidth: 1,
-                                      height: 50,
+                                      height: 60,
+                                      opacity: 1,
                                     }
                                   ),
                                   dimensions.width
@@ -1150,18 +1230,35 @@ line two` ) and will not work with special characters inside of quotes ( example
                                         borderBottomWidth: 1,
                                         borderColor:
                                           theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
                                         height: '50%',
                                       }
                                     ),
                                     dimensions.width
                                   )}
                                 >
-                                  <View>
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  >
                                     <Text
                                       accessible={true}
                                       allowFontScaling={true}
                                       style={StyleSheet.applyWidth(
-                                        GlobalStyles.TextStyles(theme)['Text'],
+                                        StyleSheet.compose(
+                                          GlobalStyles.TextStyles(theme)[
+                                            'Text'
+                                          ],
+                                          { alignSelf: 'center', marginTop: 6 }
+                                        ),
                                         dimensions.width
                                       )}
                                     >
@@ -1169,41 +1266,105 @@ line two` ) and will not work with special characters inside of quotes ( example
                                       {'時\n'}
                                     </Text>
                                   </View>
+                                  {/* View 1 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorSun,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
                                   {/* View 2 */}
-                                  <>
-                                    {!(
-                                      (listData?.isWorkTime ===
-                                        Constants['IsTrue'] && isTodayFlg) ===
-                                      Constants['IsTrue']
-                                    ) ? null : (
-                                      <View
-                                        style={StyleSheet.applyWidth(
-                                          {
-                                            backgroundColor:
-                                              theme.colors['Custom Color_23'],
-                                          },
-                                          dimensions.width
-                                        )}
-                                      />
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorMon,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        opacity: 0.3,
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
                                     )}
-                                  </>
+                                  />
                                   {/* View 3 */}
-                                  <>
-                                    {!(
-                                      listData?.isWorkTime ===
-                                      Constants['IsFalse']
-                                    ) ? null : (
-                                      <View
-                                        style={StyleSheet.applyWidth(
-                                          {
-                                            backgroundColor:
-                                              theme.colors['Custom Color_23'],
-                                          },
-                                          dimensions.width
-                                        )}
-                                      />
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorTue,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
                                     )}
-                                  </>
+                                  />
+                                  {/* View 4 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorWeb,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
+                                  {/* View 5 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorThur,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
+                                  {/* View 6 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorFri,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
+                                  {/* View 7 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorSun,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
                                 </HStack>
                                 {/* H Stack 2 */}
                                 <HStack
@@ -1216,236 +1377,141 @@ line two` ) and will not work with special characters inside of quotes ( example
                                         borderBottomWidth: 1,
                                         borderColor:
                                           theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
                                         height: '50%',
                                       }
                                     ),
                                     dimensions.width
                                   )}
                                 >
-                                  <View />
-                                  {/* View 2 */}
-                                  <>
-                                    {!(
-                                      (listData?.isWorkTime ===
-                                        Constants['IsTrue'] && isTodayFlg) ===
-                                      Constants['IsTrue']
-                                    ) ? null : (
-                                      <View
-                                        style={StyleSheet.applyWidth(
-                                          {
-                                            backgroundColor:
-                                              theme.colors['Custom Color_23'],
-                                          },
-                                          dimensions.width
-                                        )}
-                                      />
-                                    )}
-                                  </>
-                                  {/* View 3 */}
-                                  <>
-                                    {!(
-                                      listData?.isWorkTime ===
-                                      Constants['IsFalse']
-                                    ) ? null : (
-                                      <View
-                                        style={StyleSheet.applyWidth(
-                                          {
-                                            backgroundColor:
-                                              theme.colors['Custom Color_23'],
-                                          },
-                                          dimensions.width
-                                        )}
-                                      />
-                                    )}
-                                  </>
-                                </HStack>
-                              </VStack>
-                            );
-                          }}
-                          showsHorizontalScrollIndicator={true}
-                          showsVerticalScrollIndicator={true}
-                        />
-                      );
-                    }}
-                  </SPIG030000Api.FetchSelectWorkTimeGET>
-                </ScrollView>
-                {/* Scroll View 2 */}
-                <ScrollView
-                  bounces={true}
-                  showsHorizontalScrollIndicator={true}
-                  showsVerticalScrollIndicator={true}
-                  style={StyleSheet.applyWidth(
-                    { width: '12.5%' },
-                    dimensions.width
-                  )}
-                  contentContainerStyle={StyleSheet.applyWidth(
-                    {
-                      borderColor: theme.colors['Custom Color_23'],
-                      borderTopWidth: 1,
-                      flexDirection: 'column',
-                      flexWrap: 'nowrap',
-                      position: 'relative',
-                    },
-                    dimensions.width
-                  )}
-                >
-                  <SPIG030000Api.FetchSelectWorkTimeGET>
-                    {({ loading, error, data, refetchSelectWorkTime }) => {
-                      const fetchData = data?.json;
-                      if (loading) {
-                        return <ActivityIndicator />;
-                      }
-
-                      if (error || data?.status < 200 || data?.status >= 300) {
-                        return <ActivityIndicator />;
-                      }
-
-                      return (
-                        <FlatList
-                          data={fetchData}
-                          keyExtractor={listData =>
-                            listData?.id ||
-                            listData?.uuid ||
-                            JSON.stringify(listData)
-                          }
-                          listKey={'gDXbXWLJ'}
-                          numColumns={1}
-                          onEndReachedThreshold={0.5}
-                          renderItem={({ item }) => {
-                            const listData = item;
-                            return (
-                              <VStack
-                                style={StyleSheet.applyWidth(
-                                  StyleSheet.compose(
-                                    GlobalStyles.VStackStyles(theme)['V Stack'],
-                                    {
-                                      borderColor:
-                                        theme.colors['Custom Color_23'],
-                                      borderLeftWidth: 1,
-                                      borderRightWidth: 1,
-                                      height: 50,
-                                    }
-                                  ),
-                                  dimensions.width
-                                )}
-                              >
-                                <HStack
-                                  style={StyleSheet.applyWidth(
-                                    StyleSheet.compose(
-                                      GlobalStyles.HStackStyles(theme)[
-                                        'H Stack'
-                                      ],
+                                  <View
+                                    style={StyleSheet.applyWidth(
                                       {
-                                        borderBottomWidth: 1,
                                         borderColor:
                                           theme.colors['Custom Color_23'],
-                                        height: '50%',
-                                      }
-                                    ),
-                                    dimensions.width
-                                  )}
-                                >
-                                  <View>
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  >
                                     <Text
                                       accessible={true}
                                       allowFontScaling={true}
                                       style={StyleSheet.applyWidth(
-                                        GlobalStyles.TextStyles(theme)['Text'],
+                                        StyleSheet.compose(
+                                          GlobalStyles.TextStyles(theme)[
+                                            'Text'
+                                          ],
+                                          { alignSelf: 'center', marginTop: 6 }
+                                        ),
                                         dimensions.width
                                       )}
                                     >
-                                      {'\n'}
+                                      {listData?.timeH}
+                                      {'時\n'}
                                     </Text>
                                   </View>
-                                  {/* View 2 */}
-                                  <>
-                                    {!(
-                                      (listData?.isWorkTime ===
-                                        Constants['IsTrue'] && isTodayFlg) ===
-                                      Constants['IsTrue']
-                                    ) ? null : (
-                                      <View
-                                        style={StyleSheet.applyWidth(
-                                          {
-                                            backgroundColor:
-                                              theme.colors['Custom Color_23'],
-                                          },
-                                          dimensions.width
-                                        )}
-                                      />
-                                    )}
-                                  </>
-                                  {/* View 3 */}
-                                  <>
-                                    {!(
-                                      listData?.isWorkTime ===
-                                      Constants['IsFalse']
-                                    ) ? null : (
-                                      <View
-                                        style={StyleSheet.applyWidth(
-                                          {
-                                            backgroundColor:
-                                              theme.colors['Custom Color_23'],
-                                          },
-                                          dimensions.width
-                                        )}
-                                      />
-                                    )}
-                                  </>
-                                </HStack>
-                                {/* H Stack 2 */}
-                                <HStack
-                                  style={StyleSheet.applyWidth(
-                                    StyleSheet.compose(
-                                      GlobalStyles.HStackStyles(theme)[
-                                        'H Stack'
-                                      ],
+                                  {/* View 1 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
                                       {
-                                        borderBottomWidth: 1,
+                                        backgroundColor: colorSun,
                                         borderColor:
                                           theme.colors['Custom Color_23'],
-                                        height: '50%',
-                                      }
-                                    ),
-                                    dimensions.width
-                                  )}
-                                >
-                                  <View />
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
                                   {/* View 2 */}
-                                  <>
-                                    {!(
-                                      (listData?.isWorkTime ===
-                                        Constants['IsTrue'] && isTodayFlg) ===
-                                      Constants['IsTrue']
-                                    ) ? null : (
-                                      <View
-                                        style={StyleSheet.applyWidth(
-                                          {
-                                            backgroundColor:
-                                              theme.colors['Custom Color_23'],
-                                          },
-                                          dimensions.width
-                                        )}
-                                      />
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorMon,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        opacity: 0.3,
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
                                     )}
-                                  </>
+                                  />
                                   {/* View 3 */}
-                                  <>
-                                    {!(
-                                      listData?.isWorkTime ===
-                                      Constants['IsFalse']
-                                    ) ? null : (
-                                      <View
-                                        style={StyleSheet.applyWidth(
-                                          {
-                                            backgroundColor:
-                                              theme.colors['Custom Color_23'],
-                                          },
-                                          dimensions.width
-                                        )}
-                                      />
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorTue,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
                                     )}
-                                  </>
+                                  />
+                                  {/* View 4 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorWeb,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
+                                  {/* View 5 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorThur,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
+                                  {/* View 6 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorFri,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
+                                  {/* View 7 */}
+                                  <View
+                                    style={StyleSheet.applyWidth(
+                                      {
+                                        backgroundColor: colorSun,
+                                        borderColor:
+                                          theme.colors['Custom Color_23'],
+                                        borderRightWidth: 1,
+                                        height: '100%',
+                                        width: '12.5%',
+                                      },
+                                      dimensions.width
+                                    )}
+                                  />
                                 </HStack>
                               </VStack>
                             );
@@ -1456,6 +1522,85 @@ line two` ) and will not work with special characters inside of quotes ( example
                       );
                     }}
                   </SPIG030000Api.FetchSelectWorkTimeGET>
+                  {/* View Content  1 */}
+                  <View
+                    style={StyleSheet.applyWidth(
+                      {
+                        backgroundColor: theme.colors['Custom Color_10'],
+                        borderBottomWidth: 1,
+                        borderColor: theme.colors['Custom Color_10'],
+                        borderLeftWidth: 1,
+                        borderRadius: 5,
+                        borderRightWidth: 1,
+                        borderTopWidth: 1,
+                        height: 60,
+                        left: '25%',
+                        position: 'absolute',
+                        top: '0%',
+                        width: '12.5%',
+                        zIndex: 1,
+                      },
+                      dimensions.width
+                    )}
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      style={StyleSheet.applyWidth(
+                        StyleSheet.compose(
+                          GlobalStyles.TextStyles(theme)['Text'],
+                          {
+                            alignSelf: 'center',
+                            marginTop: 8,
+                            textAlign: 'center',
+                          }
+                        ),
+                        dimensions.width
+                      )}
+                    >
+                      {'訪問\n活動'}
+                    </Text>
+                  </View>
+                  {/* View Content 2 */}
+                  <View
+                    style={StyleSheet.applyWidth(
+                      {
+                        backgroundColor: theme.colors['Custom Color_11'],
+                        borderBottomWidth: 1,
+                        borderColor: theme.colors['Custom Color_10'],
+                        borderLeftWidth: 1,
+                        borderRadius: 5,
+                        borderRightWidth: 1,
+                        borderTopWidth: 1,
+                        height: 60,
+                        left: '25%',
+                        marginTop: 10,
+                        position: 'absolute',
+                        top: '0%',
+                        width: '12.5%',
+                        zIndex: 2,
+                      },
+                      dimensions.width
+                    )}
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      style={StyleSheet.applyWidth(
+                        StyleSheet.compose(
+                          GlobalStyles.TextStyles(theme)['Text'],
+                          {
+                            alignSelf: 'center',
+                            marginTop: 8,
+                            textAlign: 'center',
+                          }
+                        ),
+                        dimensions.width
+                      )}
+                    >
+                      {'訪問\n活動'}
+                    </Text>
+                  </View>
                 </ScrollView>
               </View>
             </View>

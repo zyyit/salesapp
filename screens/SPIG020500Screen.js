@@ -16,6 +16,7 @@ import {
   withTheme,
 } from '@draftbit/ui';
 import { useIsFocused } from '@react-navigation/native';
+import { BlurView } from 'expo-blur';
 import * as Linking from 'expo-linking';
 import {
   ActivityIndicator,
@@ -328,7 +329,7 @@ const SPIG020500Screen = props => {
                 </View>
               </View>
             </View>
-            {/* View 2 */}
+            {/* Bottom */}
             <>
               {Constants['IsTrue'] ? null : (
                 <View>
@@ -1262,7 +1263,7 @@ const SPIG020500Screen = props => {
             </>
             <Modal
               animationType={'none'}
-              presentationStyle={'pageSheet'}
+              presentationStyle={'fullScreen'}
               transparent={false}
               visible={Constants['imageFlg']}
             >
@@ -1570,11 +1571,13 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        <SVG
-                          source={'https://zynanci.top:441/note.svg'}
+                        {/* Image 2 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.Snipaste}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
                                 marginLeft: 12,
@@ -1621,17 +1624,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 2 */}
-                        <SVG
-                          source={'https://zynanci.top:441/map_blue.svg'}
+                        {/* Image 3 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MapBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 12,
+                                marginLeft: 13,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -1671,17 +1675,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 3 */}
-                        <SVG
-                          source={'https://zynanci.top:441/phone_blue.svg'}
+                        {/* Image 3 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.PhoneBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 11,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -1724,17 +1729,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 4 */}
-                        <SVG
-                          source={'https://zynanci.top:441/msg_blue.svg'}
+                        {/* Image 3 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MsgBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 9,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 33,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -2094,22 +2100,7 @@ const SPIG020500Screen = props => {
                       </Text>
                     </View>
 
-                    <SPIG020500Api.FetchSelectProductGET
-                      handlers={{
-                        onData: fetchData => {
-                          const handler = async () => {
-                            try {
-                              const produce = (
-                                await SPIG020500Api.selectProductGET(Constants)
-                              )?.json;
-                            } catch (err) {
-                              console.error(err);
-                            }
-                          };
-                          handler();
-                        },
-                      }}
-                    >
+                    <SPIG020500Api.FetchSelectProductGET>
                       {({ loading, error, data, refetchSelectProduct }) => {
                         const fetchData = data?.json;
                         if (loading) {
@@ -2754,11 +2745,13 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        <SVG
-                          source={'https://zynanci.top:441/note.svg'}
+                        {/* Image 3 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.Snipaste}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
                                 marginLeft: 12,
@@ -2805,17 +2798,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 2 */}
-                        <SVG
-                          source={'https://zynanci.top:441/map_blue.svg'}
+                        {/* Image 4 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MapBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 12,
+                                marginLeft: 13,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -2855,17 +2849,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 3 */}
-                        <SVG
-                          source={'https://zynanci.top:441/phone_blue.svg'}
+                        {/* Image 4 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.PhoneBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 11,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -2908,17 +2903,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 4 */}
-                        <SVG
-                          source={'https://zynanci.top:441/msg_blue.svg'}
+                        {/* Image 4 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MsgBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 9,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 33,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -3938,11 +3934,13 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        <SVG
-                          source={'https://zynanci.top:441/note.svg'}
+                        {/* Image 4 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.Snipaste}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
                                 marginLeft: 12,
@@ -3989,17 +3987,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 2 */}
-                        <SVG
-                          source={'https://zynanci.top:441/map_blue.svg'}
+                        {/* Image 5 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MapBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 12,
+                                marginLeft: 13,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -4039,17 +4038,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 3 */}
-                        <SVG
-                          source={'https://zynanci.top:441/phone_blue.svg'}
+                        {/* Image 5 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.PhoneBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 11,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -4092,17 +4092,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 4 */}
-                        <SVG
-                          source={'https://zynanci.top:441/msg_blue.svg'}
+                        {/* Image 5 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MsgBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 9,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 33,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -5122,11 +5123,13 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        <SVG
-                          source={'https://zynanci.top:441/note.svg'}
+                        {/* Image 5 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.Snipaste}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
                                 marginLeft: 12,
@@ -5173,17 +5176,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 2 */}
-                        <SVG
-                          source={'https://zynanci.top:441/map_blue.svg'}
+                        {/* Image 6 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MapBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 12,
+                                marginLeft: 13,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -5223,17 +5227,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 3 */}
-                        <SVG
-                          source={'https://zynanci.top:441/phone_blue.svg'}
+                        {/* Image 6 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.PhoneBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 11,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 30,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -5276,17 +5281,18 @@ const SPIG020500Screen = props => {
                           dimensions.width
                         )}
                       >
-                        {/* SVG 4 */}
-                        <SVG
-                          source={'https://zynanci.top:441/msg_blue.svg'}
+                        {/* Image 5 */}
+                        <Image
+                          resizeMode={'cover'}
+                          source={Images.MsgBlue}
                           style={StyleSheet.applyWidth(
                             StyleSheet.compose(
-                              GlobalStyles.SVGStyles(theme)['SVG'],
+                              GlobalStyles.ImageStyles(theme)['Image'],
                               {
                                 height: 30,
-                                marginLeft: 9,
+                                marginLeft: 12,
                                 marginTop: 12,
-                                width: 33,
+                                width: 28,
                               }
                             ),
                             dimensions.width
@@ -5991,6 +5997,154 @@ const SPIG020500Screen = props => {
                       >
                         {'150 日経過'}
                       </Text>
+                    </View>
+                    {/* View 12 */}
+                    <View
+                      style={StyleSheet.applyWidth(
+                        {
+                          borderBottomWidth: 1,
+                          borderColor: theme.colors['Light'],
+                          flexDirection: 'row',
+                          justifyContent: 'center',
+                          marginBottom: 10,
+                          marginLeft: -16,
+                          marginRight: -16,
+                          marginTop: -10,
+                          paddingBottom: 5,
+                          paddingLeft: 16,
+                          paddingRight: 44,
+                          paddingTop: 5,
+                        },
+                        dimensions.width
+                      )}
+                    >
+                      {/* Fetch 2 */}
+                      <SPIG020500Api.FetchSelectPrefecturesGET
+                        handlers={{
+                          onData: fetch2Data => {
+                            const handler = async () => {
+                              try {
+                                const prefectureList = (
+                                  await SPIG020500Api.selectPrefecturesGET(
+                                    Constants
+                                  )
+                                )?.json;
+                                setGlobalVariableValue({
+                                  key: 'prefectures',
+                                  value: prefectureList,
+                                });
+                              } catch (err) {
+                                console.error(err);
+                              }
+                            };
+                            handler();
+                          },
+                        }}
+                      >
+                        {({
+                          loading,
+                          error,
+                          data,
+                          refetchSelectPrefectures,
+                        }) => {
+                          const fetch2Data = data?.json;
+                          if (loading) {
+                            return <ActivityIndicator />;
+                          }
+
+                          if (
+                            error ||
+                            data?.status < 200 ||
+                            data?.status >= 300
+                          ) {
+                            return <ActivityIndicator />;
+                          }
+
+                          return (
+                            <Picker
+                              autoDismissKeyboard={true}
+                              dropDownBackgroundColor={theme.colors.background}
+                              dropDownBorderColor={theme.colors.divider}
+                              dropDownBorderRadius={8}
+                              dropDownBorderWidth={1}
+                              dropDownTextColor={theme.colors.strong}
+                              iconSize={24}
+                              leftIconMode={'inset'}
+                              mode={'native'}
+                              onValueChange={newPickerValue => {
+                                const handler = async () => {
+                                  try {
+                                    setPrefecture(newPickerValue);
+                                    const cititys = (
+                                      await SPIG020500Api.selectCitisGET(
+                                        Constants,
+                                        { prefectureId: newPickerValue }
+                                      )
+                                    )?.json;
+                                    setGlobalVariableValue({
+                                      key: 'citys',
+                                      value: cititys,
+                                    });
+                                  } catch (err) {
+                                    console.error(err);
+                                  }
+                                };
+                                handler();
+                              }}
+                              options={Constants['prefectures']}
+                              placeholder={'都道府県'}
+                              selectedIconColor={theme.colors.strong}
+                              selectedIconSize={20}
+                              style={StyleSheet.applyWidth(
+                                {
+                                  marginLeft: 30,
+                                  paddingBottom: 0,
+                                  paddingTop: 0,
+                                  width: 180,
+                                },
+                                dimensions.width
+                              )}
+                              type={'solid'}
+                              value={prefecture}
+                            />
+                          );
+                        }}
+                      </SPIG020500Api.FetchSelectPrefecturesGET>
+                      <Picker
+                        autoDismissKeyboard={true}
+                        dropDownBackgroundColor={theme.colors.background}
+                        dropDownBorderColor={theme.colors.divider}
+                        dropDownBorderRadius={8}
+                        dropDownBorderWidth={1}
+                        dropDownTextColor={theme.colors.strong}
+                        iconSize={24}
+                        leftIconMode={'inset'}
+                        mode={'native'}
+                        onValueChange={newPickerValue => {
+                          try {
+                            setCityID(newPickerValue);
+                          } catch (err) {
+                            console.error(err);
+                          }
+                        }}
+                        options={Constants['citys']}
+                        placeholder={'市区町村'}
+                        selectedIconColor={theme.colors.strong}
+                        selectedIconName={'Feather/check'}
+                        selectedIconSize={20}
+                        style={StyleSheet.applyWidth(
+                          {
+                            height: 20,
+                            marginLeft: 10,
+                            paddingBottom: 0,
+                            paddingTop: 0,
+                            width: 180,
+                          },
+                          dimensions.width
+                        )}
+                        type={'solid'}
+                        value={cityID}
+                      />
                     </View>
                   </View>
                 </View>

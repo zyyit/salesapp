@@ -1,17 +1,21 @@
 import React from 'react';
 import * as GlobalStyles from '../GlobalStyles.js';
+import * as SPIG030200Api from '../apis/SPIG030200Api.js';
 import * as GlobalVariables from '../config/GlobalVariableContext';
 import Breakpoints from '../utils/Breakpoints';
 import * as StyleSheet from '../utils/StyleSheet';
 import { Icon, Pressable, ScreenContainer, withTheme } from '@draftbit/ui';
 import { useIsFocused } from '@react-navigation/native';
 import {
+  ActivityIndicator,
   Alert,
+  FlatList,
   ScrollView,
   Text,
   View,
   useWindowDimensions,
 } from 'react-native';
+import { Fetch } from 'react-request';
 
 const SPIG030200Screen = props => {
   const dimensions = useWindowDimensions();
@@ -712,6 +716,71 @@ line two` ) and will not work with special characters inside of quotes ( example
                     {'土'}
                   </Text>
                 </View>
+              </View>
+              {/* date */}
+              <View
+                style={StyleSheet.applyWidth(
+                  { marginLeft: 9 },
+                  dimensions.width
+                )}
+              >
+                <SPIG030200Api.FetchCalendarGET>
+                  {({ loading, error, data, refetchCalendar }) => {
+                    const fetchData = data?.json;
+                    if (loading) {
+                      return <ActivityIndicator />;
+                    }
+
+                    if (error || data?.status < 200 || data?.status >= 300) {
+                      return <ActivityIndicator />;
+                    }
+
+                    return (
+                      <FlatList
+                        data={fetchData}
+                        keyExtractor={listData =>
+                          listData?.id ||
+                          listData?.uuid ||
+                          JSON.stringify(listData)
+                        }
+                        listKey={'6j0I5Cla'}
+                        numColumns={7}
+                        onEndReachedThreshold={0.5}
+                        renderItem={({ item }) => {
+                          const listData = item;
+                          return (
+                            <View
+                              style={StyleSheet.applyWidth(
+                                { height: 50, width: '14%' },
+                                dimensions.width
+                              )}
+                            >
+                              {/* day */}
+                              <View>
+                                <Text
+                                  accessible={true}
+                                  allowFontScaling={true}
+                                  style={StyleSheet.applyWidth(
+                                    GlobalStyles.TextStyles(theme)['Text'],
+                                    dimensions.width
+                                  )}
+                                >
+                                  {listData?.day}
+                                </Text>
+                              </View>
+                              {/* View 2 */}
+                              <View />
+                              {/* View 3 */}
+                              <View />
+                            </View>
+                          );
+                        }}
+                        showsHorizontalScrollIndicator={true}
+                        showsVerticalScrollIndicator={true}
+                      />
+                    );
+                  }}
+                </SPIG030200Api.FetchCalendarGET>
               </View>
             </View>
           </ScrollView>
