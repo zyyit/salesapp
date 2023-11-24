@@ -21,7 +21,7 @@ export function MyExampleComponent() {
     return (
       <View style={styles.paginationStyle}>
         <View style={styles.controView}>
-          <Pressable onPress={scrollToSecondSlide(1)}>
+          <Pressable>
             <View style={styles.myButton}>
               <Text style={styles.paginationText}>1</Text>
             </View>
@@ -29,7 +29,7 @@ export function MyExampleComponent() {
           <View style={styles.indication}></View>
         </View>
         <View style={styles.controView}>
-          <Pressable onPress={onPressFunction(1)}>
+          <Pressable>
             <View style={styles.myButton}>
               <Text style={styles.paginationText}>2</Text>
             </View>
@@ -37,7 +37,7 @@ export function MyExampleComponent() {
           <View style={styles.indication}></View>
         </View>
         <View style={styles.controView}>
-          <Pressable onPress={onPressFunction(2)}>
+          <Pressable>
             <View style={styles.myButton}>
               <Text style={styles.paginationText}>3</Text>
             </View>
@@ -45,7 +45,7 @@ export function MyExampleComponent() {
           <View style={styles.indication}></View>
         </View>
         <View style={styles.controView}>
-          <Pressable onPress={onPressFunction(3)}>
+          <Pressable>
             <View style={styles.myButton}>
               <Text style={styles.paginationText}>4</Text>
             </View>
@@ -53,7 +53,7 @@ export function MyExampleComponent() {
           <View style={styles.indication}></View>
         </View>
         <View style={styles.controView}>
-          <Pressable onPress={onPressFunction(4)}>
+          <Pressable>
             <View style={styles.myButton}>
               <Text style={styles.paginationText}>5</Text>
             </View>
@@ -61,7 +61,7 @@ export function MyExampleComponent() {
           <View style={styles.indication}></View>
         </View>
         <View style={styles.controView}>
-          <Pressable onPress={onPressFunction(5)}>
+          <Pressable>
             <View style={styles.myButton}>
               <Text style={styles.paginationText}>6</Text>
             </View>

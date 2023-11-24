@@ -16,4 +16,5 @@ export default {
   MapBlue: require('../assets/images/MapBlue.png'),
   PhoneBlue: require('../assets/images/PhoneBlue.png'),
   MsgBlue: require('../assets/images/MsgBlue.png'),
+  Buin2: require('../assets/images/Buin2.png'),
 };
